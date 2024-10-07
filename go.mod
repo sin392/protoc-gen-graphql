@@ -1,4 +1,4 @@
-module github.com/danielvladco/go-proto-gql
+module github.com/sin392/protoc-gen-graphql
 
 go 1.17
 

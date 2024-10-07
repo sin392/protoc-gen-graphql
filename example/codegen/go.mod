@@ -1,20 +1,20 @@
-module github.com/danielvladco/go-proto-gql/example/codegen
+module github.com/sin392/protoc-gen-graphql/example/codegen
 
 go 1.17
 
 replace (
-	github.com/danielvladco/go-proto-gql v0.9.0 => ../..
-	github.com/danielvladco/go-proto-gql/example/codegen/api v0.0.0 => ./api
+	github.com/sin392/protoc-gen-graphql v0.9.0 => ../..
+	github.com/sin392/protoc-gen-graphql/example/codegen/api v0.0.0 => ./api
 )
 
 require (
 	github.com/99designs/gqlgen v0.17.22
-	github.com/danielvladco/go-proto-gql/example/codegen/api v0.0.0
+	github.com/sin392/protoc-gen-graphql/example/codegen/api v0.0.0
 )
 
 require (
 	github.com/agnivade/levenshtein v1.1.1 // indirect
-	github.com/danielvladco/go-proto-gql v0.9.0 // indirect
+	github.com/sin392/protoc-gen-graphql v0.9.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect

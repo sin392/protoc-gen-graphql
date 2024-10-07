@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/danielvladco/go-proto-gql/branch/refactor-and-e2e-tests/graph/badge.svg?token=L3N8kUGpGV)](https://codecov.io/gh/danielvladco/go-proto-gql)
+[![codecov](https://codecov.io/gh/sin392/protoc-gen-graphql/branch/refactor-and-e2e-tests/graph/badge.svg?token=L3N8kUGpGV)](https://codecov.io/gh/sin392/protoc-gen-graphql)
 
 This project aims to solve the problem of communication between services that use different API protocols. 
 Such as GraphQL and gRPC.

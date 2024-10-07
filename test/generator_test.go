@@ -16,8 +16,8 @@ import (
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/pluginpb"
 
-	"github.com/danielvladco/go-proto-gql/pkg/generator"
-	"github.com/danielvladco/go-proto-gql/pkg/protoparser"
+	"github.com/sin392/protoc-gen-graphql/pkg/generator"
+	"github.com/sin392/protoc-gen-graphql/pkg/protoparser"
 )
 
 func Test_Generator(t *testing.T) {

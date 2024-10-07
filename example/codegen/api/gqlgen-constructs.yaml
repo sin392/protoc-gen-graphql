@@ -9,12 +9,12 @@ model:
   filename: graphql/constructs/model.go
 
 autobind:
-  - "github.com/danielvladco/go-proto-gql/example/codegen/api/pb"
+  - "github.com/sin392/protoc-gen-graphql/example/codegen/api/pb"
 
 models:
   Pb_Any:
     model:
-      - github.com/danielvladco/go-proto-gql/example/codegen/api/pb.Any
+      - github.com/sin392/protoc-gen-graphql/example/codegen/api/pb.Any
   GoogleProtobuf_TimestampInput:
     model:
       - google.golang.org/protobuf/types/known/timestamppb.Timestamp
@@ -32,15 +32,15 @@ models:
       - github.com/99designs/gqlgen/graphql.Int
       - github.com/99designs/gqlgen/graphql.Int64
       - github.com/99designs/gqlgen/graphql.Int32
-      - github.com/danielvladco/go-proto-gql/pkg/types.Uint32
-      - github.com/danielvladco/go-proto-gql/pkg/types.Uint64
+      - github.com/sin392/protoc-gen-graphql/pkg/types.Uint32
+      - github.com/sin392/protoc-gen-graphql/pkg/types.Uint64
   Any:
     model:
-      - github.com/danielvladco/go-proto-gql/pkg/types.Any
+      - github.com/sin392/protoc-gen-graphql/pkg/types.Any
   Bytes:
     model:
-      - github.com/danielvladco/go-proto-gql/pkg/types.Bytes
+      - github.com/sin392/protoc-gen-graphql/pkg/types.Bytes
   Float:
     model:
       - github.com/99designs/gqlgen/graphql.Float
-      - github.com/danielvladco/go-proto-gql/pkg/types.Float32
+      - github.com/sin392/protoc-gen-graphql/pkg/types.Float32
