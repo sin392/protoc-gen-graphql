@@ -1,10 +1,5 @@
 # Go tools dependencies
-GO_TOOLS := \
-	google.golang.org/grpc/cmd/protoc-gen-go-grpc \
-	google.golang.org/protobuf/cmd/protoc-gen-go \
-	github.com/99designs/gqlgen \
-	./protoc-gen-gql \
-	./protoc-gen-gogql
+GO_TOOLS := ./protoc-gen-gql
 
 GOPATH := $(shell go env GOPATH)
 
