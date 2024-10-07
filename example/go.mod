@@ -1,4 +1,4 @@
-module github.com/sin392/protoc-gen-graphql/example/codegen/api
+module github.com/sin392/protoc-gen-graphql/example
 
 go 1.17
 
