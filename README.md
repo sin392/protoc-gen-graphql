@@ -14,7 +14,7 @@ This project provides tools to help you build your API much quicker for both of 
 1. Use `protoc-gen-gql`, `protoc-gen-gogql` and `proto2graphql` to generate boilerplate code on your backend.
 2. Spin up a gateway and convey the messages from one protocol to the other on the fly!
 
-Check out the docs for getting started and usage examples at: https://danielvladco.github.io/go-proto-gql/
+Check out the docs for getting started and usage examples at: https://sin392.github.io/go-proto-gql/
 
 ## Community:
 Will be happy for any contributions. So feel free to create issues, forks and PRs.

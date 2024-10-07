@@ -1,5 +1,5 @@
 syntax = "proto2";
-package danielvladco.protobuf.graphql;
+package sin392.protobuf.graphql;
 
 option go_package = "github.com/sin392/protoc-gen-graphql/pkg/graphqlpb";
 
