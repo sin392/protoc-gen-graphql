@@ -1,4 +1,7 @@
 version: v2
+modules:
+  - path: .
+    name: buf.build/sin392/protoc-gen-graphql
 lint:
   use:
     - STANDARD
