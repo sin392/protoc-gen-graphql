@@ -10,9 +10,11 @@ go install github.com/sin392/protoc-gen-graphql
 
 2. Please get option.proto.
 If you will use buf, you can get the module from BSR.
+
+
 https://buf.build/sin392/protoc-gen-graphql
 
-Otherwise, please download proto/graphql/option.proto and place your project.
+Otherwise, please download `proto/graphql/option.proto` and place your project.
 
 ## Original:
 This repository was forked from https://github.com/danielvladco/go-proto-gql
