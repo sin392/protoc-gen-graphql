@@ -2,8 +2,7 @@ package main
 
 import (
 	"bytes"
-	"google.golang.org/protobuf/compiler/protogen"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"path"
@@ -11,23 +10,27 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/vektah/gqlparser/v2/formatter"
+	"google.golang.org/protobuf/compiler/protogen"
+
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/pluginpb"
 
 	"github.com/sin392/protoc-gen-graphql/pkg/generator"
+	"github.com/vektah/gqlparser/v2/formatter"
 )
 
 func main() {
-	in, err := ioutil.ReadAll(os.Stdin)
+	// protocからの出力を標準入力から読み込む
+	in, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// protocからの出力をパース
 	req := &pluginpb.CodeGeneratorRequest{}
 	if err := proto.Unmarshal(in, req); err != nil {
 		log.Fatal(err)
 	}
-
+	// ファイルを生成
 	files, err := generate(req)
 	res := &pluginpb.CodeGeneratorResponse{
 		File:              files,
@@ -36,7 +39,7 @@ func main() {
 	if err != nil {
 		res.Error = proto.String(err.Error())
 	}
-
+	// 生成結果を標準出力に書き込み
 	out, err := proto.Marshal(res)
 	if err != nil {
 		log.Fatal(err)
@@ -92,7 +95,8 @@ func generate(req *pluginpb.CodeGeneratorRequest) (outFiles []*pluginpb.CodeGene
 		})
 	}
 
-	return
+	// 戻り値に名前指定してるのでreturnだけでも大丈夫
+	return outFiles, nil
 }
 
 func resolveGraphqlFilename(protoFileName string, merge bool, extension string) string {

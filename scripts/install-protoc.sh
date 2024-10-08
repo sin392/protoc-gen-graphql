@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 PROTOC_VERSION=${PROTOC_VERSION:-"21.12"}
 

@@ -1,23 +1,20 @@
 syntax = "proto3";
-package pb;
-option go_package = "github.com/sin392/protoc-gen-graphql/example;pb";
+
+package example;
 
 import "google/protobuf/any.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
+option go_package = "github.com/sin392/protoc-gen-graphql/example";
+
 service Constructs {
-  rpc Scalars_(Scalars) returns (
-      Scalars); // all possible scalars and same message as input and output
-  rpc Repeated_(Repeated)
-      returns (Repeated); // all scalars messages and enums as repeated
-  rpc Maps_(Maps) returns (
-      Maps); // all possible maps and different messages as input and output
+  rpc Scalars_(Scalars) returns (Scalars); // all possible scalars and same message as input and output
+  rpc Repeated_(Repeated) returns (Repeated); // all scalars messages and enums as repeated
+  rpc Maps_(Maps) returns (Maps); // all possible maps and different messages as input and output
   rpc Any_(google.protobuf.Any) returns (Any); // same name different types
-  rpc Empty_(google.protobuf.Empty)
-      returns (Empty); // empty input and empty output
-  rpc Empty2_(EmptyRecursive)
-      returns (EmptyNested);            // messages with all empty fields
+  rpc Empty_(google.protobuf.Empty) returns (Empty); // empty input and empty output
+  rpc Empty2_(EmptyRecursive) returns (EmptyNested); // messages with all empty fields
   rpc Empty3_(Empty3) returns (Empty3); // messages with all empty fields
   rpc Ref_(Ref) returns (Ref);
   rpc Oneof_(Oneof) returns (Oneof);
@@ -25,23 +22,29 @@ service Constructs {
 }
 
 message Empty3 {
-  message Int { Empty3 e = 1; }
+  message Int {
+    Empty3 e = 1;
+  }
   Int i = 1;
 }
 
 message Foo {
-  message Foo2 { string param1 = 1; }
+  message Foo2 {
+    string param1 = 1;
+  }
   string param1 = 1;
   string param2 = 2;
 }
 
 enum Bar {
-  BAR1 = 0;
-  BAR2 = 1;
-  BAR3 = 2;
+  BAR_UNSPECIFIED = 0;
+  BAR_1 = 1;
+  BAR_2 = 2;
 }
 
-message Baz { string param1 = 1; }
+message Baz {
+  string param1 = 1;
+}
 
 message Scalars {
   double double = 1;
@@ -102,7 +105,9 @@ message Maps {
   map<string, Bar> string_bar = 14;
 }
 
-message Any { string param1 = 1; }
+message Any {
+  string param1 = 1;
+}
 
 message Empty {}
 
@@ -119,24 +124,29 @@ message EmptyNested {
   EmptyNested1 nested1 = 1;
 }
 
-message Timestamp { string time = 1; }
+message Timestamp {
+  string time = 1;
+}
 
 message Ref {
-  google.protobuf.Empty empty =
-      10; // must disappear as part of is empty validation
-  message Bar { string param1 = 1; }
+  google.protobuf.Empty empty = 10; // must disappear as part of is empty validation
+  message Bar {
+    string param1 = 1;
+  }
   message Foo {
     enum En {
-      A0 = 0;
-      A1 = 1;
+      EN_UNSPECIFIED = 0;
+      EN_1 = 1;
     }
     message Baz {
-      message Gz { string param1 = 1; }
+      message Gz {
+        string param1 = 1;
+      }
     }
     message Bar {
       enum En {
-        A0 = 0;
-        A1 = 1;
+        EN_UNSPECIFIED = 0;
+        EN_1 = 1;
       }
       string param1 = 1;
     }
@@ -151,10 +161,10 @@ message Ref {
   google.protobuf.Timestamp external = 1;
   Timestamp local_time = 11;
   Baz file = 2;
-  pb.Foo file_msg = 8;
-  .pb.Bar file_enum = 9;
+  Foo file_msg = 8;
+  // .exemple.Bar file_enum = 9;
   Foo local = 3;
-  .pb.Foo.Foo2 foreign = 4;
+  // .exemple.Foo.Foo2 foreign = 4;
   Foo.En en1 = 5;
   Foo.Bar.En en2 = 6;
   Foo.Baz.Gz gz = 7;
@@ -162,13 +172,15 @@ message Ref {
 
 message Oneof {
   string param1 = 1;
-  oneof Oneof1 {
+  oneof oneof1 {
     string param2 = 2;
     string param3 = 3;
   }
-  oneof Oneof2 {
+  oneof oneof2 {
     string param4 = 4;
     string param5 = 5;
   }
-  oneof Oneof3 { string param6 = 6; }
+  oneof oneof3 {
+    string param6 = 6;
+  }
 }

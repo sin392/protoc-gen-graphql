@@ -1,13 +1,15 @@
 directive @Constructs on FIELD_DEFINITION
-directive @Oneof_Oneof1 on INPUT_FIELD_DEFINITION
-directive @Oneof_Oneof2 on INPUT_FIELD_DEFINITION
-directive @Oneof_Oneof3 on INPUT_FIELD_DEFINITION
-"""Any is any json type"""
+directive @OneofOneof1 on INPUT_FIELD_DEFINITION
+directive @OneofOneof2 on INPUT_FIELD_DEFINITION
+directive @OneofOneof3 on INPUT_FIELD_DEFINITION
+"""
+Any is any json type
+"""
 scalar Any
 enum Bar {
-	BAR1
-	BAR2
-	BAR3
+	BAR_UNSPECIFIED
+	BAR_1
+	BAR_2
 }
 type Baz {
 	param1: String
@@ -16,6 +18,9 @@ input BazInput {
 	param1: String
 }
 scalar Bytes
+type Example_Any {
+	param1: String
+}
 type Foo {
 	param1: String
 	param2: String
@@ -23,12 +28,6 @@ type Foo {
 input FooInput {
 	param1: String
 	param2: String
-}
-type Foo_Foo2 {
-	param1: String
-}
-input Foo_Foo2Input {
-	param1: String
 }
 """
  A Timestamp represents a point in time independent of any time zone or local
@@ -81,8 +80,15 @@ input Foo_Foo2Input {
      Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
          .setNanos((int) ((millis % 1000) * 1000000)).build();
 
+ Example 5: Compute Timestamp from Java `Instant.now()`.
 
- Example 5: Compute Timestamp from current time in Python.
+     Instant now = Instant.now();
+
+     Timestamp timestamp =
+         Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+             .setNanos(now.getNano()).build();
+
+ Example 6: Compute Timestamp from current time in Python.
 
      timestamp = Timestamp()
      timestamp.GetCurrentTime()
@@ -111,9 +117,8 @@ input Foo_Foo2Input {
  [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
  the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
  the Joda Time's [`ISODateTimeFormat.dateTime()`](
- http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
+ http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
  ) to obtain a formatter capable of generating timestamps in this format.
-
 
 
 """
@@ -185,8 +190,15 @@ type GoogleProtobuf_Timestamp {
      Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
          .setNanos((int) ((millis % 1000) * 1000000)).build();
 
+ Example 5: Compute Timestamp from Java `Instant.now()`.
 
- Example 5: Compute Timestamp from current time in Python.
+     Instant now = Instant.now();
+
+     Timestamp timestamp =
+         Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+             .setNanos(now.getNano()).build();
+
+ Example 6: Compute Timestamp from current time in Python.
 
      timestamp = Timestamp()
      timestamp.GetCurrentTime()
@@ -215,9 +227,8 @@ type GoogleProtobuf_Timestamp {
  [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
  the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
  the Joda Time's [`ISODateTimeFormat.dateTime()`](
- http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
+ http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
  ) to obtain a formatter capable of generating timestamps in this format.
-
 
 
 """
@@ -417,58 +428,58 @@ type Mutation {
 	 all possible scalars and same message as input and output
 	
 	"""
-	constructsScalars_(in: ScalarsInput): Scalars @Constructs
+	constructsScalars_(in: ScalarsInput): Scalars
 	"""
 	 all scalars messages and enums as repeated
 	
 	"""
-	constructsRepeated_(in: RepeatedInput): Repeated @Constructs
+	constructsRepeated_(in: RepeatedInput): Repeated
 	"""
 	 all possible maps and different messages as input and output
 	
 	"""
-	constructsMaps_(in: MapsInput): Maps @Constructs
+	constructsMaps_(in: MapsInput): Maps
 	"""
 	 same name different types
 	
 	"""
-	constructsAny_(in: Any): Pb_Any @Constructs
+	constructsAny_(in: Any): Example_Any
 	"""
 	 empty input and empty output
 	
 	"""
-	constructsEmpty_: Boolean @Constructs
+	constructsEmpty_: Boolean
 	"""
 	 messages with all empty fields
 	
 	"""
-	constructsEmpty2_: Boolean @Constructs
+	constructsEmpty2_: Boolean
 	"""
 	 messages with all empty fields
 	
 	"""
-	constructsEmpty3_: Boolean @Constructs
-	constructsRef_(in: RefInput): Ref @Constructs
-	constructsOneof_(in: OneofInput): Oneof @Constructs
-	constructsCallWithId: Boolean @Constructs
+	constructsEmpty3_: Boolean
+	constructsRef_(in: RefInput): Ref
+	constructsOneof_(in: OneofInput): Oneof
+	constructsCallWithId: Boolean
 }
 type Oneof {
 	param1: String
-	oneof1: Oneof_Oneof1
-	oneof2: Oneof_Oneof2
-	oneof3: Oneof_Oneof3
+	oneof1: OneofOneof1
+	oneof2: OneofOneof2
+	oneof3: OneofOneof3
 }
 input OneofInput {
 	param1: String
-	param2: String @Oneof_Oneof1
-	param3: String @Oneof_Oneof1
-	param4: String @Oneof_Oneof2
-	param5: String @Oneof_Oneof2
-	param6: String @Oneof_Oneof3
+	param2: String @OneofOneof1
+	param3: String @OneofOneof1
+	param4: String @OneofOneof2
+	param5: String @OneofOneof2
+	param6: String @OneofOneof3
 }
-union Oneof_Oneof1 = Oneof_Param2 | Oneof_Param3
-union Oneof_Oneof2 = Oneof_Param4 | Oneof_Param5
-union Oneof_Oneof3 = Oneof_Param6
+union OneofOneof1 = Oneof_Param2 | Oneof_Param3
+union OneofOneof2 = Oneof_Param4 | Oneof_Param5
+union OneofOneof3 = Oneof_Param6
 type Oneof_Param2 {
 	param2: String
 }
@@ -484,9 +495,6 @@ type Oneof_Param5 {
 type Oneof_Param6 {
 	param6: String
 }
-type Pb_Any {
-	param1: String
-}
 type Query {
 	dummy: Boolean
 }
@@ -495,10 +503,16 @@ type Ref {
 	external: GoogleProtobuf_Timestamp
 	localTime: Timestamp
 	file: Baz
-	fileMsg: Foo
-	fileEnum: Bar
+	fileMsg: Ref_Foo
+	"""
+	 .exemple.Bar file_enum = 9;
+	
+	"""
 	local: Ref_Foo
-	foreign: Foo_Foo2
+	"""
+	 .exemple.Foo.Foo2 foreign = 4;
+	
+	"""
 	en1: Ref_Foo_En
 	en2: Ref_Foo_Bar_En
 	gz: Ref_Foo_Baz_Gz
@@ -508,10 +522,16 @@ input RefInput {
 	external: GoogleProtobuf_TimestampInput
 	localTime: TimestampInput
 	file: BazInput
-	fileMsg: FooInput
-	fileEnum: Bar
+	fileMsg: Ref_FooInput
+	"""
+	 .exemple.Bar file_enum = 9;
+	
+	"""
 	local: Ref_FooInput
-	foreign: Foo_Foo2Input
+	"""
+	 .exemple.Foo.Foo2 foreign = 4;
+	
+	"""
 	en1: Ref_Foo_En
 	en2: Ref_Foo_Bar_En
 	gz: Ref_Foo_Baz_GzInput
@@ -545,8 +565,8 @@ input Ref_Foo_BarInput {
 	param1: String
 }
 enum Ref_Foo_Bar_En {
-	A0
-	A1
+	EN_UNSPECIFIED
+	EN_1
 }
 type Ref_Foo_Baz_Gz {
 	param1: String
@@ -555,8 +575,8 @@ input Ref_Foo_Baz_GzInput {
 	param1: String
 }
 enum Ref_Foo_En {
-	A0
-	A1
+	EN_UNSPECIFIED
+	EN_1
 }
 type Repeated {
 	double: [Float!]

@@ -27,12 +27,12 @@ func Test_Generator(t *testing.T) {
 		expectFile string
 	}{{
 		name:       "Constructs",
-		inputFile:  "testdata/constructs-input.proto",
-		expectFile: "testdata/constructs-expect.graphql",
+		inputFile:  "testdata/constructs_input.proto",
+		expectFile: "testdata/constructs_expect.graphql",
 	}, {
 		name:       "Options",
-		inputFile:  "testdata/options-input.proto",
-		expectFile: "testdata/options-expect.graphql",
+		inputFile:  "testdata/options_input.proto",
+		expectFile: "testdata/options_expect.graphql",
 	}}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
@@ -40,21 +40,30 @@ func Test_Generator(t *testing.T) {
 			absFile, _ := filepath.Abs(file)
 			absDir, _ := filepath.Split(absFile)
 			apiPath := filepath.Join(absDir, "..")
+			// FileDescriptorの取得
+			// 複数ファイル分とってる？
 			descs, err := protoparser.Parse([]string{apiPath, absDir}, []string{tc.inputFile}, protoparser.WithSourceCodeInfo(false))
 			if err != nil {
 				t.Fatal(err)
 			}
+			// プラグインの取得
 			p, err := protogen.Options{}.New(&pluginpb.CodeGeneratorRequest{
+				// 生成対象のprotoファイル
 				FileToGenerate: []string{tc.inputFile},
-				ProtoFile:      generator.ResolveProtoFilesRecursively(descs).AsFileDescriptorProto(),
+				// フィールドとエクステンションの型名: FileDescriptorProtoは常に仕様を満たす
+				// ResolveProtoFilesRecursivelyはprotoの構造を再起的にパースしてる？
+				// そしてそれをFileDescriptorProtoに変換している？
+				ProtoFile: generator.ResolveProtoFilesRecursively(descs).AsFileDescriptorProto(),
 			})
 			if err != nil {
 				t.Fatal(err)
 			}
+			// graphqlのスキーマを生成
 			gqlDesc, err := generator.NewSchemas(descs, false, true, p)
 			if err != nil {
 				t.Fatal(err)
 			}
+			// 書き込み対象のファイルを開いて書き込み
 			f, err := os.Open(relativeFile(tc.expectFile))
 			if err != nil {
 				t.Fatal(err)
